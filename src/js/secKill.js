@@ -40,11 +40,26 @@ function dealTask(task) {
     var count = 1;
     var timer = setInterval(function () {
         if(task.selector == "jQuery") {
+			//$(task.numlocation)[0].value=task.num;
+			$(task.numLocation).each(function(){
+                this.value=task.num;
+            });
             $(task.location).each(function(){
                 this.click();
             });
         } else {
-            $(getElementsByXPath(task.location)).each(function(){
+			
+			//alert(task.location);
+			//getElementsByXPath('id("blk_detail_main_btn")/DIV[1]/DIV[1]/INPUT[1]')[0].value=100;
+			//$(getElementsByXPath('id("blk_detail_main_btn")/DIV[1]/DIV[1]/INPUT[1]')).each(function(){
+             //    this.value=100;
+            //});
+            $(getElementsByXPath(task.numLocation)).each(function(){
+                this.value=task.num;
+            });
+
+			//console.log(task.location);
+			$(getElementsByXPath(task.location)).each(function(){
                 this.click();
             });
         }

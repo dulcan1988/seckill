@@ -60,6 +60,10 @@ $(document).ready(function () {
                 $(card).find("span[datafld='url']").text(tasks[i].url.length > urlLength? tasks[i].url.substr(0, urlLength)+"..." : tasks[i].url);
                 $(card).find("span[datafld='url']").attr("title", tasks[i].url);
                 $(card).find("span[datafld='selector']").text(tasks[i].selector);
+                $(card).find("span[datafld='numLocation']").text(tasks[i].numLocation.length > urlLength? tasks[i].numLocation.substr(0, urlLength)+"..." : tasks[i].numLocation);
+                $(card).find("span[datafld='numLocation']").attr("title", tasks[i].numLocation);
+                $(card).find("span[datafld='num']").text(tasks[i].num);
+                $(card).find("span[datafld='num']").attr("title", tasks[i].num);
                 $(card).find("span[datafld='location']").text(tasks[i].location.length > urlLength? tasks[i].location.substr(0, urlLength)+"..." : tasks[i].location);
                 $(card).find("span[datafld='location']").attr("title", tasks[i].location);
                 $(card).find("span[datafld='killTime']").text(tasks[i].killTime.replace("T", " "));

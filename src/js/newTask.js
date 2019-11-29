@@ -6,10 +6,23 @@
         "    <div class=\"secKill-logo\">\n" +
         "        新增秒杀\n" +
         "    </div>\n" +
+		"    <div class=\"secKill-filed\">\n" +
+        "        <span class=\"secKill-name\">秒杀网址:</span><br/>\n" +
+        "        <input type=\"text\" name=\"url\" class=\"secKill-input-text\" value=\"\" id=\"url\" placeholder=\"为空默认为当前网址\" />\n" +
+        "    </div>\n" +
         "    <div class=\"secKill-filed\">\n" +
         "        <span class=\"secKill-name\">秒杀商品:</span><br/>\n" +
         "        <input type=\"text\" name=\"taskName\" class=\"secKill-input-text\" value=\"\" id=\"taskName\" placeholder=\"请输入商品名称\" />\n" +
         "    </div>\n" +
+		"    <div class=\"secKill-filed\">\n" +
+        "        <span class=\"secKill-name\">数量定位:</span><br/>\n" +
+        "        <input type=\"text\" name=\"numLocation\" class=\"secKill-input-text\" value=\"\" id=\"numLocation\" placeholder=\"请输入商品名称\" />\n" +
+        "    </div>\n" +
+		"    <div class=\"secKill-filed\">\n" +
+        "        <span class=\"secKill-name\">数量框:</span><br/>\n" +
+        "        <input type=\"text\" name=\"num\" class=\"secKill-input-text\" value=\"\" id=\"num\" placeholder=\"请输入商品名称\" />\n" +
+        "    </div>\n" +
+		
         "    <div class=\"secKill-filed\">\n" +
         "        <span class=\"secKill-name\">选择器:</span><br/>\n" +
         "        <input type=\"radio\" name=\"selector\" id=\"rb1\" value=\"jQuery\" checked=\"checked\"/>\n" +
@@ -77,9 +90,11 @@
                 var selector = $("#secKillForm input[name=selector]:checked").val();
                 if (selector == "jQuery") {
                     var path = getDomPath(e.target);
+                    //$("input:focus").val(path.join(' > '));
                     $("#secKillForm #location").val(path.join(' > '));
                 } else {
                     var path = getXPathTo(e.target);
+                    //$("input:focus").val(path);
                     $("#secKillForm #location").val(path);
                 }
                 $("#secKillForm #result").text(1);
@@ -123,13 +138,22 @@
             alert("请设定秒杀按钮选择结果");
             return false;
         }
-        killTask.url = window.location.href;
+		var url = $("#secKillForm #url").val();
+		if(url!=null&&url!=''){
+			killTask.url = url;
+		}else{
+			killTask.url = window.location.href;
+		}
+        
         killTask.id = new Date().getTime();
         killTask.name = $("#secKillForm #taskName").val();
         killTask.selector = $("#secKillForm input[name=selector]:checked").val();
         killTask.location = location;
         killTask.killTime = $("#secKillForm #killTime").val();
         killTask.frequency = $("#secKillForm #frequency").val();
+        killTask.num = $("#secKillForm #num").val();
+        killTask.numLocation = $("#secKillForm #numLocation").val();
+        
         if($("#secKillForm #frequency").val() < 100) {
             alert("秒杀频率最小值：100");
             return false;
